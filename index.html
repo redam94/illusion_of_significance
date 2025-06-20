@@ -138,7 +138,7 @@
                             </div>
                             <div class="bg-orange-100 p-4 rounded-md">
                                 <h4 class="text-lg font-bold text-red-700">4. The Flaw</h4>
-                                <p class="text-zinc-700 font-semibold mt-1">The p-value selection process couldn't disentangle the effects. The TV ads and email blasts created brand awareness that drove people to search for the product, where they then saw the influencer's content and clicked. The influencer campaign got the final "click" and thus looked like the sole *significant* driver in the model, but it was only the last step in a chain. The model didn't find the true cause; it just latched onto the most statistically convenient correlation.</p>
+                                <p class="text-zinc-700 font-semibold mt-1">The p-value selection process couldn't disentangle the effects. The TV ads and email blasts created brand awareness that drove people to search for the product, where they then saw the influencer's content and clicked. The influencer campaign got the final "click" and thus looked like the sole <b>significant</b> driver in the model, but it was only the last step in a chain. The model didn't find the true cause; it just latched onto the most statistically convenient correlation.</p>
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                         <p class="font-semibold text-zinc-500">The Myth:</p>
                         <h4 class="text-lg font-bold mt-1 mb-3 text-zinc-800">"I'm using domain knowledge to guide me."</h4>
                         <p class="font-semibold text-[#556B2F]">The Reality:</p>
-                        <p class="mt-1 text-zinc-700">If domain knowledge is the true guide, variables should be included based on theory, *regardless* of their p-values. If you only keep theory-backed variables when they are significant, you are still p-hacking.</p>
+                        <p class="mt-1 text-zinc-700">If domain knowledge is the true guide, variables should be included based on theory, <b>regardless</b> of their p-values. If you only keep theory-backed variables when they are significant, you are still p-hacking.</p>
                     </div>
                      <div class="bg-stone-100 p-6 rounded-lg border border-stone-200">
                         <p class="font-semibold text-zinc-500">The Myth:</p>
@@ -534,7 +534,7 @@
             },
             {
                 title: "5. False Precision Syndrome",
-                description: "Reported standard errors and confidence intervals are artificially narrow because they are calculated as if the final model was the *only* model ever considered. They fail to account for the uncertainty of the selection process itself.",
+                description: "Reported standard errors and confidence intervals are artificially narrow because they are calculated as if the final model was the <b>only</b> model ever considered. They fail to account for the uncertainty of the selection process itself.",
                 in_practice: "A final report states 'TV ROI is 3.2x with a 95% confidence interval of [2.8, 3.6]'. This ignores the fact that 10 other models were run, creating a misleading sense of certainty."
             },
             {
@@ -553,7 +553,7 @@
         const solutionData = [
             {
                 title: "1. Causal Theory and Pre-Specification",
-                description: "The most important step is to define the model structure *before* looking at statistical results. This means deciding which variables to include based on domain knowledge and a theoretical understanding of the market.",
+                description: "The most important step is to define the model structure <b>before</b> looking at statistical results. This means deciding which variables to include based on domain knowledge and a theoretical understanding of the market.",
                 in_practice: "Before running any regressions, the team documents the 'full model': 'We will include TV, Radio, and Search spend as marketing variables. We will also include seasonality and competitor spend as control variables, as we believe they are major confounders.' These variables stay in, regardless of their p-values."
             },
             {
@@ -563,7 +563,7 @@
             },
             {
                 title: "3. Information Criteria (AIC/BIC)",
-                description: "Use metrics that balance model fit with complexity to compare a *set* of candidate models without relying on p-values. AIC (Akaike Information Criterion) and BIC (Bayesian Information Criterion) penalize models for having too many variables.",
+                description: "Use metrics that balance model fit with complexity to compare a <b>set</b> of candidate models without relying on p-values. AIC (Akaike Information Criterion) and BIC (Bayesian Information Criterion) penalize models for having too many variables.",
                 in_practice: "The analyst builds three theory-driven models: one with a simple adstock for TV, one with a more complex saturation and carryover effect, and one that adds an interaction with competitor spend. They then compare the AIC/BIC scores. The model with the complex adstock has the lowest score, indicating the best balance of fit and simplicity."
             },
             {

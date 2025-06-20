@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Illusion of Significance: Why P-Value Selection Undermines Marketing Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f4; /* stone-100 */
+        }
+        h1, h2, h3 {
+            font-family: 'Lora', serif;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .spurious-chart-line {
+            fill: none;
+            stroke-width: 3;
+            animation: dash 25s linear infinite;
+        }
+        @keyframes dash {
+            from { stroke-dashoffset: 1000; }
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-zinc-800">
+
+    <!-- Header -->
+    <header class="bg-[#29322A] text-stone-100 shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">The Illusion of Significance</h1>
+            <div class="hidden md:flex space-x-6">
+                <a href="#problem" class="hover:text-amber-400 transition-colors">The Problem</a>
+                <a href="#sins" class="hover:text-amber-400 transition-colors">The Sins</a>
+                <a href="#justifications" class="hover:text-amber-400 transition-colors">Justifications</a>
+                <a href="#red-flags" class="hover:text-amber-400 transition-colors">Red Flags</a>
+                <a href="#solution" class="hover:text-amber-400 transition-colors">The Solution</a>
+                <a href="#roadmap" class="hover:text-amber-400 transition-colors">Roadmap</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#problem" class="block py-2 hover:text-amber-400 transition-colors">The Problem</a>
+            <a href="#sins" class="block py-2 hover:text-amber-400 transition-colors">The Sins</a>
+            <a href="#justifications" class="block py-2 hover:text-amber-400 transition-colors">Justifications</a>
+            <a href="#red-flags" class="block py-2 hover:text-amber-400 transition-colors">Red Flags</a>
+            <a href="#solution" class="block py-2 hover:text-amber-400 transition-colors">The Solution</a>
+            <a href="#roadmap" class="block py-2 hover:text-amber-400 transition-colors">Roadmap</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="bg-[#4A573E] text-stone-100 py-20 md:py-32 section-fade-in">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">The Illusion of Significance</h1>
+                <p class="text-lg md:text-2xl text-stone-200 max-w-4xl mx-auto">Why P-Value Hunting Undermines Marketing Analytics and Costs Millions</p>
+                <a href="#problem" class="mt-8 inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">Discover the Truth</a>
+            </div>
+        </section>
+
+        <!-- The Problem Section -->
+        <section id="problem" class="py-16 md:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">The Credibility Crisis</h2>
+                    <p class="mt-4 text-lg text-zinc-600 max-w-3xl mx-auto">Many marketing mix models are built on statistical quicksand. The common practice of p-value-driven variable selection creates biased, unstable, and misleading results that lead directly to poor business decisions.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-bold">Common P-Value Hunting Behaviors</h3>
+                        <p class="text-zinc-600">These manual approaches feel scientific, but they suffer from the same flaws as automated methods. The core issue is using the same data for both model construction and statistical inference.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <svg class="h-6 w-6 text-[#556B2F] mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Running multiple models and cherry-picking the one with the "best" p-values.</span>
+                            </li>
+                             <li class="flex items-start">
+                                <svg class="h-6 w-6 text-[#556B2F] mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Adding or removing variables simply to get them below the p < 0.05 threshold.</span>
+                            </li>
+                             <li class="flex items-start">
+                                <svg class="h-6 w-6 text-[#556B2F] mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <span>Trying different data transformations until coefficients become "significant."</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-100 p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-bold text-center">The Time Series Problem</h3>
+                        <p class="text-zinc-600 mt-4 mb-6 text-center">This gets worse with time series data, leading to 'spurious regression' where meaningless correlations look significant.</p>
+                        <svg viewBox="0 0 100 65" class="w-full">
+                           <title>Spurious Correlation Chart</title>
+                           <path d="M 5,50 C 20,5 30,75 50,60 S 70,5 95,20" class="spurious-chart-line" stroke-dasharray="5, 5" style="stroke: #d97706; animation-delay: 1.5s;"></path>
+                           <path d="M 5,40 C 20,60 40,10 55,20 S 80,60 95,45" class="spurious-chart-line" style="stroke: #556B2F;"></path>
+                           <text x="50" y="58" text-anchor="middle" font-size="5" class="fill-zinc-500">Trending variables can appear</text>
+                           <text x="50" y="64" text-anchor="middle" font-size="5" class="fill-zinc-500">correlated by pure chance.</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Business Consequences Section -->
+                <div class="mt-16 md:mt-24">
+                    <div class="text-center mb-12">
+                         <h3 class="text-2xl md:text-3xl font-bold text-zinc-900">The Business Consequences: From Flawed Model to Failed Strategy</h3>
+                    </div>
+                    <div class="bg-orange-50 border-l-4 border-orange-500 p-8 rounded-r-lg max-w-4xl mx-auto">
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-lg font-bold text-orange-800">1. The Multi-Channel Campaign</h4>
+                                <p class="text-zinc-700 mt-1">A marketing team runs a huge holiday promotion: new website banners, TV ads, an influencer campaign, and email blasts. All channels are running concurrently.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-orange-800">2. The P-Value Selected Model</h4>
+                                <p class="text-zinc-700 mt-1">An analyst builds a regression model to explain sales, including spend from all channels. Using p-value selection, they find that "influencer spend" is highly significant (p < 0.001), while TV and email are not. The final model, containing only the "significant" variables, suggests every dollar spent on influencers generates $50 in sales.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-orange-800">3. The Causal Fallacy</h4>
+                                <p class="text-zinc-700 mt-1">The CMO, seeing the impressive p-value and ROI, declares, "Influencers are our statistically proven silver bullet! For next year's campaign, let's cut the TV and email budget and put 90% of our money into influencers."</p>
+                            </div>
+                            <div class="bg-orange-100 p-4 rounded-md">
+                                <h4 class="text-lg font-bold text-red-700">4. The Flaw</h4>
+                                <p class="text-zinc-700 font-semibold mt-1">The p-value selection process couldn't disentangle the effects. The TV ads and email blasts created brand awareness that drove people to search for the product, where they then saw the influencer's content and clicked. The influencer campaign got the final "click" and thus looked like the sole *significant* driver in the model, but it was only the last step in a chain. The model didn't find the true cause; it just latched onto the most statistically convenient correlation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- The Seven Deadly Sins Section -->
+        <section id="sins" class="py-16 md:py-24 bg-stone-100 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">The Seven Deadly Sins of P-Value Selection</h2>
+                    <p class="mt-4 text-lg text-zinc-600 max-w-3xl mx-auto">Understanding why p-value selection fails requires recognizing how it violates core statistical principles, even when selecting models manually.</p>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="space-y-4" id="sins-accordion-container">
+                        <!-- Sins Accordion Items will be injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Justifications Section -->
+        <section id="justifications" class="py-16 md:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">Common Justifications (and Why They're Flawed)</h2>
+                    <p class="mt-4 text-lg text-zinc-600 max-w-3xl mx-auto">Many analysts believe they avoid these pitfalls by building models manually. This is a dangerous misconception.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-stone-100 p-6 rounded-lg border border-stone-200">
+                        <p class="font-semibold text-zinc-500">The Myth:</p>
+                        <h4 class="text-lg font-bold mt-1 mb-3 text-zinc-800">"I'm being more careful than an algorithm."</h4>
+                        <p class="font-semibold text-[#556B2F]">The Reality:</p>
+                        <p class="mt-1 text-zinc-700">The statistical problems arise from using p-values to guide model choice, not from who (or what) makes the choice. The bias is introduced the moment a p-value from the data is used to decide whether to keep a variable in the model.</p>
+                    </div>
+                     <div class="bg-stone-100 p-6 rounded-lg border border-stone-200">
+                        <p class="font-semibold text-zinc-500">The Myth:</p>
+                        <h4 class="text-lg font-bold mt-1 mb-3 text-zinc-800">"I'm using domain knowledge to guide me."</h4>
+                        <p class="font-semibold text-[#556B2F]">The Reality:</p>
+                        <p class="mt-1 text-zinc-700">If domain knowledge is the true guide, variables should be included based on theory, *regardless* of their p-values. If you only keep theory-backed variables when they are significant, you are still p-hacking.</p>
+                    </div>
+                     <div class="bg-stone-100 p-6 rounded-lg border border-stone-200">
+                        <p class="font-semibold text-zinc-500">The Myth:</p>
+                        <h4 class="text-lg font-bold mt-1 mb-3 text-zinc-800">"I only test a few reasonable models."</h4>
+                        <p class="font-semibold text-[#556B2F]">The Reality:</p>
+                        <p class="mt-1 text-zinc-700">Even testing 3-5 models and picking the one with the best p-values constitutes multiple testing and biases the results. The final p-values do not have their stated meaning because you've implicitly tested more than one hypothesis.</p>
+                    </div>
+                     <div class="bg-stone-100 p-6 rounded-lg border border-stone-200">
+                        <p class="font-semibold text-zinc-500">The Myth:</p>
+                        <h4 class="text-lg font-bold mt-1 mb-3 text-zinc-800">"I stop when the model makes business sense."</h4>
+                        <p class="font-semibold text-[#556B2F]">The Reality:</p>
+                        <p class="mt-1 text-zinc-700">This is often confirmation bias disguised as expertise. "Business sense" becomes a post-hoc rationalization for statistically significant findings that align with our beliefs, while non-significant findings are dismissed as incorrect.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Uncertainty Laundering Machine -->
+        <section class="py-16 md:py-24 bg-[#29322A] text-stone-100 section-fade-in">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">The Uncertainty Laundering Machine</h2>
+                    <p class="mt-4 text-lg text-stone-300 max-w-3xl mx-auto">A powerful analogy from statistician Andrew Gelman for how the process creates a false sense of certainty.</p>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8">
+                    <div class="text-center p-6 bg-stone-700/50 rounded-lg w-full md:w-1/4">
+                        <h3 class="text-xl font-semibold text-amber-400">1. Start</h3>
+                        <p>Messy, uncertain data with correlated variables.</p>
+                    </div>
+                    <svg class="h-8 w-8 text-stone-500 hidden md:block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    <div class="text-center p-6 bg-stone-700/50 rounded-lg w-full md:w-1/4">
+                        <h3 class="text-xl font-semibold text-amber-400">2. Process</h3>
+                        <p>Apply p-value hunting and stepwise regression.</p>
+                    </div>
+                    <svg class="h-8 w-8 text-stone-500 hidden md:block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    <div class="text-center p-6 bg-stone-700/50 rounded-lg w-full md:w-1/4">
+                        <h3 class="text-xl font-semibold text-amber-400">3. Output</h3>
+                        <p>Present a model with "significant" results (p < 0.05).</p>
+                    </div>
+                </div>
+                <div class="mt-8 text-center bg-orange-900/50 border border-orange-500 p-6 rounded-lg max-w-3xl mx-auto">
+                    <h3 class="text-2xl font-bold text-orange-300">The Result: False Precision</h3>
+                    <p class="mt-2 text-stone-200">The organization receives what looks like valuable intelligence, but its true value has been lost. Technical methods have been used to manufacture certainty from thin air.</p>
+                </div>
+             </div>
+        </section>
+
+        <!-- Red Flags Section -->
+        <section id="red-flags" class="py-16 md:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">Identifying P-Hacking in Practice</h2>
+                    <p class="mt-4 text-lg text-zinc-600 max-w-3xl mx-auto">How do you spot these problems in a presentation or report? Look for these key red flags.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-stone-100 p-6 rounded-lg border border-stone-200 hover:shadow-lg transition-shadow">
+                        <h3 class="text-xl font-bold mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                            Unstable or "Forced-Stable" Results
+                        </h3>
+                        <p class="text-zinc-600">Watch for key findings that change dramatically with each data refresh. Conversely, be wary of results that are *suspiciously* stable. If analysts must manually 'guide' the model each quarter to reproduce prior findings, they may be fitting a narrative, not new data.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg border border-stone-200 hover:shadow-lg transition-shadow">
+                        <h3 class="text-xl font-bold mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            The "Too-Clean" Narrative
+                        </h3>
+                        <p class="text-zinc-600">Every single included variable is highly significant (e.g., p < 0.01), and there's a perfect story for why. Real-world data is messy; a perfect model is often a sign that uncertainty has been "laundered" away.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg border border-stone-200 hover:shadow-lg transition-shadow">
+                        <h3 class="text-xl font-bold mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 1v4m0 0h-4m4 0l-5-5" /></svg>
+                            No Out-of-Sample Validation
+                        </h3>
+                        <p class="text-zinc-600">The entire presentation focuses on how well the model fits the data it was trained on (e.g., high R-squared), with no mention of its performance on a holdout set. This is a major red flag.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg border border-stone-200 hover:shadow-lg transition-shadow">
+                        <h3 class="text-xl font-bold mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                            Resistance to Scrutiny
+                        </h3>
+                        <p class="text-zinc-600">Questions about which other models were tested or why certain variables were excluded are met with defensive or vague answers. The modeling process is treated like a "black box".</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg border border-stone-200 hover:shadow-lg transition-shadow">
+                        <h3 class="text-xl font-bold mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                            Focus on Significance over Effect Size
+                        </h3>
+                        <p class="text-zinc-600">The presenter emphasizes that a variable is "statistically significant" but is vague about the actual size and business importance of its effect. Significance does not automatically equal importance.</p>
+                    </div>
+                     <div class="bg-stone-100 p-6 rounded-lg border border-stone-200 hover:shadow-lg transition-shadow">
+                        <h3 class="text-xl font-bold mb-2 flex items-center">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                            Unjustified Complexity
+                        </h3>
+                        <p class="text-zinc-600">The model uses complex transformations or interactions that aren't justified by business theory but happen to make a key variable significant. Complexity should serve a purpose, not be a tool for p-hacking.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Solution Section -->
+        <section id="solution" class="py-16 md:py-24 bg-stone-100 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">The Path Forward: Principled Alternatives</h2>
+                    <p class="mt-4 text-lg text-zinc-600 max-w-3xl mx-auto">If not p-values, what? The answer lies in a portfolio of techniques designed to handle complexity and embrace uncertainty.</p>
+                </div>
+                 <div class="max-w-4xl mx-auto">
+                    <div class="space-y-4" id="solution-accordion-container">
+                        <!-- Solution Accordion Items will be injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="py-16 md:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">Practical Implementation Roadmap</h2>
+                    <p class="mt-4 text-lg text-zinc-600 max-w-3xl mx-auto">From statistical theater to true decision science. Uncertainty is not a flaw; it is a strategic advantage.</p>
+                </div>
+
+                <!-- New Timeline Roadmap -->
+                <div class="relative max-w-4xl mx-auto mt-16">
+                    <!-- The Vertical Line -->
+                    <div class="absolute left-0 md:left-1/2 w-1 h-full bg-stone-300 transform md:-translate-x-1/2"></div>
+                    
+                    <!-- Step 1: Immediate -->
+                    <div class="relative mb-12">
+                        <div class="md:flex items-center">
+                            <div class="md:w-1/2 md:pr-8">
+                                <!-- Content on the left -->
+                            </div>
+                            <div class="md:w-1/2 md:pl-8">
+                                <div class="bg-stone-50 p-6 rounded-lg shadow-md border border-stone-200">
+                                    <h3 class="text-2xl font-bold text-[#4A573E] mb-4">Immediate Steps</h3>
+                                    <ul class="space-y-3 text-zinc-700">
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Stop using p-values for selection</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Pre-specify model structures</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Report uncertainty prominently</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Validate with holdout testing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute flex items-center justify-center w-20 h-20 rounded-full bg-[#4A573E] border-4 border-white shadow-lg top-1/2 left-0 md:left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                            <span class="text-white font-bold text-xl">1</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Medium-Term -->
+                    <div class="relative mb-12">
+                        <div class="md:flex items-center">
+                            <div class="md:w-1/2 md:pr-8">
+                               <div class="bg-stone-50 p-6 rounded-lg shadow-md border border-stone-200">
+                                    <h3 class="text-2xl font-bold text-[#556B2F] mb-4">Medium-Term</h3>
+                                    <ul class="space-y-3 text-zinc-700">
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Implement LASSO/Ridge regression</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Use AIC/BIC for comparison</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Adopt Bayesian frameworks</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Test for trends & structural breaks</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-8">
+                                <!-- Content on the right -->
+                            </div>
+                        </div>
+                        <div class="absolute flex items-center justify-center w-20 h-20 rounded-full bg-[#556B2F] border-4 border-white shadow-lg top-1/2 left-0 md:left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                             <span class="text-white font-bold text-xl">2</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Long-Term -->
+                     <div class="relative mb-12">
+                        <div class="md:flex items-center">
+                            <div class="md:w-1/2 md:pr-8">
+                                <!-- Content on the left -->
+                            </div>
+                            <div class="md:w-1/2 md:pl-8">
+                                <div class="bg-stone-50 p-6 rounded-lg shadow-md border border-stone-200">
+                                    <h3 class="text-2xl font-bold text-[#6B8E23] mb-4">Long-Term Excellence</h3>
+                                    <ul class="space-y-3 text-zinc-700">
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Integrate causal thinking deeply</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Build decision frameworks on uncertainty</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Train stakeholders to use uncertainty</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Require experimental validation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute flex items-center justify-center w-20 h-20 rounded-full bg-[#6B8E23] border-4 border-white shadow-lg top-1/2 left-0 md:left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                             <span class="text-white font-bold text-xl">3</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Continual Improvement -->
+                    <div class="relative">
+                        <div class="md:flex items-center">
+                            <div class="md:w-1/2 md:pr-8">
+                               <div class="bg-stone-50 p-6 rounded-lg shadow-md border border-stone-200">
+                                    <h3 class="text-2xl font-bold text-[#8A9A5B] mb-4">Continual Improvement</h3>
+                                    <ul class="space-y-3 text-zinc-700">
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Test & validate findings</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Refine models with new data & insights</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Educate stakeholders continuously</li>
+                                        <li class="flex items-center"><span class="inline-block w-3 h-3 bg-amber-500 rounded-full mr-3"></span>Foster a culture of statistical humility</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 md:pl-8">
+                                <!-- Content on the right -->
+                            </div>
+                        </div>
+                        <div class="absolute flex items-center justify-center w-20 h-20 rounded-full bg-[#8A9A5B] border-4 border-white shadow-lg top-1/2 left-0 md:left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                            <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM18 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-[#29322A] text-stone-100 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-bold">Choose Insight Over Illusion</h2>
+            <p class="mt-4 max-w-2xl mx-auto text-stone-300">The future of marketing analytics lies in the honest quantification of uncertainty. It's time to demand a higher standard.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Intersection Observer for Fade-in Animation ---
+        const sections = document.querySelectorAll('.section-fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Generic Accordion Function ---
+        function setupAccordion(containerId, data, exampleType) {
+            const accordionContainer = document.getElementById(containerId);
+            if (!accordionContainer) return;
+
+            data.forEach(item => {
+                const accordionItem = document.createElement('div');
+                let bgColor = (containerId === 'sins-accordion-container') ? 'bg-white' : 'bg-stone-50';
+                accordionItem.className = `border border-stone-200 rounded-lg ${bgColor} shadow-sm`;
+                
+                let contentHTML = `<div class="p-5 text-zinc-600">${item.description}</div>`;
+                
+                if (item.in_practice) {
+                    let exampleBox;
+                    if (exampleType === 'sin') {
+                         exampleBox = `
+                            <div class="px-5 pb-5">
+                                <h4 class="font-semibold text-zinc-700 mb-2">How it looks in practice:</h4>
+                                <p class="text-zinc-600 bg-stone-100 p-4 rounded-md border-l-4 border-amber-600">${item.in_practice}</p>
+                            </div>
+                        `;
+                    } else { // solution
+                        exampleBox = `
+                            <div class="px-5 pb-5">
+                                <h4 class="font-semibold text-zinc-700 mb-2">Implementation Example:</h4>
+                                <p class="text-zinc-600 bg-green-50 p-4 rounded-md border-l-4 border-green-600">${item.in_practice}</p>
+                            </div>
+                        `;
+                    }
+                    contentHTML = contentHTML.replace('</div>', exampleBox + '</div>');
+                }
+
+                accordionItem.innerHTML = `
+                    <button class="w-full flex justify-between items-center p-5 text-left font-semibold text-zinc-800 focus:outline-none hover:bg-stone-100 transition-colors">
+                        <span>${item.title}</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                        ${contentHTML}
+                    </div>
+                `;
+                accordionContainer.appendChild(accordionItem);
+            });
+
+            accordionContainer.addEventListener('click', (e) => {
+                const header = e.target.closest('button');
+                if (!header) return;
+                
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('svg');
+
+                // Close all other items in this accordion
+                const allContent = accordionContainer.querySelectorAll('.accordion-content');
+                const allIcons = accordionContainer.querySelectorAll('button svg');
+                allContent.forEach((c, i) => {
+                    if (c !== content) {
+                        c.style.maxHeight = null;
+                        if (allIcons[i]) allIcons[i].classList.remove('rotate-180');
+                    }
+                });
+
+                // Toggle clicked item
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    if (icon) icon.classList.remove('rotate-180');
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    if (icon) icon.classList.add('rotate-180');
+                }
+            });
+        }
+        
+        // --- Data for Seven Deadly Sins Accordion ---
+        const sinsData = [
+            {
+                title: "1. Systematized Cherry-Picking",
+                description: "With enough models to try, these methods will always find 'significant' patterns, even in pure noise. This is the statistical equivalent of shooting an arrow at a wall and then drawing the target around it.",
+                in_practice: "An analyst tries several different models and selects the one whose p-values confirm their prior beliefs or tell the most convenient story, justifying it as 'making the most business sense.'"
+            },
+            {
+                title: "2. The Multiple Testing Trap",
+                description: "Every model specification an analyst tries is a hypothesis test. Running dozens—or even a handful—of specifications virtually guarantees false discoveries (Type I errors).",
+                in_practice: "An analyst insists they are being careful by 'only' testing 3-5 reasonable models. Statistically, this is still multiple testing and biases the results of the 'winning' model."
+            },
+            {
+                title: "3. Chasing Sample-Specific Patterns",
+                description: "The process optimizes for noise and random quirks in the current dataset, creating models that fail to generalize and perform poorly on new, unseen data.",
+                in_practice: "A model performs brilliantly on the data from Q1-Q3. When Q4 data arrives, its predictions are wildly inaccurate because it learned the noise of the first three quarters, not the true underlying signal."
+            },
+            {
+                title: "4. Winner's Curse Bias",
+                description: "Variables that survive the gauntlet of p-value selection have their coefficients systematically inflated. The procedure favors randomly strong associations, making their effects look larger than they really are.",
+                in_practice: "A marketing channel passes the p < 0.05 threshold and is reported to have a 4x ROI. In reality, its true effect might be closer to 1.5x, but it was 'lucky' in this specific dataset."
+            },
+            {
+                title: "5. False Precision Syndrome",
+                description: "Reported standard errors and confidence intervals are artificially narrow because they are calculated as if the final model was the *only* model ever considered. They fail to account for the uncertainty of the selection process itself.",
+                in_practice: "A final report states 'TV ROI is 3.2x with a 95% confidence interval of [2.8, 3.6]'. This ignores the fact that 10 other models were run, creating a misleading sense of certainty."
+            },
+            {
+                title: "6. Model Instability",
+                description: "Because the selection process latches onto noise, minor changes in the input data (like adding a new month of sales) can cause the 'optimal' model to change dramatically.",
+                in_practice: "A key digital channel is significant in this quarter's model. After a data refresh next quarter, it's no longer significant, leading to frantic efforts to 'fix' the model to get the old result back."
+            },
+            {
+                title: "7. Transformation Shopping",
+                description: "Trying different data transformations (e.g., log, adstock, power transforms) until results become significant. This is not principled analysis; it's just another form of cherry-picking.",
+                in_practice: "'Let's try a log-log model. Hmm, no significance. What about a semi-log? Okay, that variable is significant now!' This is using transformations to find significance, not to better model reality."
+            }
+        ];
+        
+        // --- Data for Solutions Accordion ---
+        const solutionData = [
+            {
+                title: "1. Causal Theory and Pre-Specification",
+                description: "The most important step is to define the model structure *before* looking at statistical results. This means deciding which variables to include based on domain knowledge and a theoretical understanding of the market.",
+                in_practice: "Before running any regressions, the team documents the 'full model': 'We will include TV, Radio, and Search spend as marketing variables. We will also include seasonality and competitor spend as control variables, as we believe they are major confounders.' These variables stay in, regardless of their p-values."
+            },
+            {
+                title: "2. Regularization Methods (LASSO, Ridge)",
+                description: "These modern frequentist techniques are designed to prevent overfitting and improve predictive accuracy by shrinking coefficients. Instead of making a binary keep/drop decision, they penalize model complexity, shrinking unimportant coefficients toward zero.",
+                in_practice: "Using LASSO regression, the analyst finds that the coefficient for 'Display Ads' is shrunk to be very close to zero, but not removed entirely. This suggests it has a small, likely non-zero effect, providing a more nuanced result than simply declaring it 'not significant' and removing it."
+            },
+            {
+                title: "3. Information Criteria (AIC/BIC)",
+                description: "Use metrics that balance model fit with complexity to compare a *set* of candidate models without relying on p-values. AIC (Akaike Information Criterion) and BIC (Bayesian Information Criterion) penalize models for having too many variables.",
+                in_practice: "The analyst builds three theory-driven models: one with a simple adstock for TV, one with a more complex saturation and carryover effect, and one that adds an interaction with competitor spend. They then compare the AIC/BIC scores. The model with the complex adstock has the lowest score, indicating the best balance of fit and simplicity."
+            },
+            {
+                title: "4. Out-of-Sample Validation",
+                description: "The ultimate test of a model is how well it performs on unseen data. This decouples the process of model building from model testing, providing an honest estimate of predictive performance.",
+                in_practice: "The team uses data from 2021-2023 to build their models. They then use the final candidate model to predict sales for the first half of 2024 (the 'holdout set'). The model's performance on this unseen data is what's reported as its true predictive power, not its R-squared on the training data."
+            },
+            {
+                title: "5. Bayesian Modeling",
+                description: "This framework is exceptionally well-suited for decision-making under uncertainty. Instead of a single point estimate and a p-value, every parameter gets a full probability distribution, which explicitly quantifies uncertainty.",
+                in_practice: "The final report doesn't say 'TV ROI is $3.20 (p < 0.05).' Instead, it presents a chart showing the probability distribution for TV ROI. The chart shows that while the most likely value is $3.20, there's a 20% chance it's less than $1.50 and a 10% chance it's more than $5.00. This gives decision-makers a full picture of the risk and opportunity."
+            }
+        ];
+
+        // --- Initialize All Accordions ---
+        setupAccordion('sins-accordion-container', sinsData, 'sin');
+        setupAccordion('solution-accordion-container', solutionData, 'solution');
+        
+        // Activate first section on load
+        document.querySelector('.section-fade-in').classList.add('visible');
+
+    </script>
+</body>
+</html>

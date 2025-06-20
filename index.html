@@ -74,7 +74,7 @@
             <div class="container mx-auto px-6 text-center">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">The Illusion of Significance</h1>
                 <p class="text-lg md:text-2xl text-stone-200 max-w-4xl mx-auto">Why P-Value Hunting Undermines Marketing Analytics and Costs Millions</p>
-                <a href="#problem" class="mt-8 inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">Discover the Truth</a>
+                <a href="#problem" class="mt-8 inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">Look Past the Mirage</a>
             </div>
         </section>
 
@@ -83,7 +83,7 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">The Credibility Crisis</h2>
-                    <p class="mt-4 text-lg text-zinc-600 max-w-3xl mx-auto">Many marketing mix models are built on statistical quicksand. The common practice of p-value-driven variable selection creates biased, unstable, and misleading results that lead directly to poor business decisions.</p>
+                    <p class="mt-4 text-lg text-zinc-600 max-w-3xl mx-auto">Some marketing mix models are built on statistical quicksand. The practice of p-value-driven variable selection creates biased, unstable, and misleading results that lead directly to poor business decisions.</p>
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -97,7 +97,7 @@
                             </li>
                              <li class="flex items-start">
                                 <svg class="h-6 w-6 text-[#556B2F] mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                <span>Adding or removing variables simply to get them below the p < 0.05 threshold.</span>
+                                <span>Adding or removing variables simply to get them below an arbitrary p-value threshold.</span>
                             </li>
                              <li class="flex items-start">
                                 <svg class="h-6 w-6 text-[#556B2F] mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -108,38 +108,58 @@
                     <div class="bg-stone-100 p-8 rounded-lg shadow-md">
                         <h3 class="text-2xl font-bold text-center">The Time Series Problem</h3>
                         <p class="text-zinc-600 mt-4 mb-6 text-center">This gets worse with time series data, leading to 'spurious regression' where meaningless correlations look significant.</p>
-                        <svg viewBox="0 0 100 65" class="w-full">
+                        <svg viewBox="0 0 100 50" class="w-full">
                            <title>Spurious Correlation Chart</title>
-                           <path d="M 5,50 C 20,5 30,75 50,60 S 70,5 95,20" class="spurious-chart-line" stroke-dasharray="5, 5" style="stroke: #d97706; animation-delay: 1.5s;"></path>
-                           <path d="M 5,40 C 20,60 40,10 55,20 S 80,60 95,45" class="spurious-chart-line" style="stroke: #556B2F;"></path>
-                           <text x="50" y="58" text-anchor="middle" font-size="5" class="fill-zinc-500">Trending variables can appear</text>
-                           <text x="50" y="64" text-anchor="middle" font-size="5" class="fill-zinc-500">correlated by pure chance.</text>
+                           <path d="M 5,30 C 20,20 30,35 50,25 S 70,5 95,10" class="spurious-chart-line" stroke-dasharray="5, 5" style="stroke: #d97706; animation-delay: 1.5s;"></path>
+                           <path d="M 5,10 C 20,30 40,25 55,35 S 80,45 95,30" class="spurious-chart-line" style="stroke: #556B2F;"></path>
+                          <!-- <text x="50" y="48" text-anchor="middle" font-size="4" class="fill-zinc-500 text-wrap">Trending variables can appear correlated by pure chance.</text> -->
                         </svg>
+                        <p class="text-zinc-500 text-center font-light">Trending variables can appear correlated by pure chance.</p>
                     </div>
                 </div>
 
                 <!-- Business Consequences Section -->
                 <div class="mt-16 md:mt-24">
                     <div class="text-center mb-12">
-                         <h3 class="text-2xl md:text-3xl font-bold text-zinc-900">The Business Consequences: From Flawed Model to Failed Strategy</h3>
+                         <h2 class="text-3xl md:text-4xl font-bold text-zinc-900">The Business Consequences</h2>
+                        <p class="text-lg md:text-2xl text-stone-500 max-w-4xl mx-auto">From Flawed Model to Failed Strategy</p>
+
                     </div>
-                    <div class="bg-orange-50 border-l-4 border-orange-500 p-8 rounded-r-lg max-w-4xl mx-auto">
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="text-lg font-bold text-orange-800">1. The Multi-Channel Campaign</h4>
-                                <p class="text-zinc-700 mt-1">A marketing team runs a huge holiday promotion: new website banners, TV ads, an influencer campaign, and email blasts. All channels are running concurrently.</p>
+                    <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                        <!-- Example 1: The Excluded Confounder -->
+                        <div class="flex flex-col">
+                            <h4 class="text-xl font-bold text-center mb-4 text-zinc-800">Example 1: The Excluded Confounder</h4>
+                            <div class="flex-grow flex flex-col items-center space-y-4">
+                                <div class="w-full bg-stone-50 border-l-4 border-stone-300 p-4 pb-16 rounded-r-lg">
+                                    <p><strong class="text-zinc-900">1. The Scenario:</strong> A company's product sales are highly seasonal, peaking in summer. They launch a big influencer campaign in July.</p>
+                                </div>
+                                <div class="w-full bg-stone-50 border-l-4 border-stone-300 p-4 rounded-r-lg">
+                                    <p><strong class="text-zinc-900">2. The Flawed Analysis:</strong> An analyst includes "influencer spend" and a "summer" variable. The "summer" variable gets a p-value of 0.15. Following protocol, they remove the "non-significant" variable.</p>
+                                </div>
+                                <div class="w-full bg-stone-50 border-l-4 border-stone-300 p-4 pb-4 rounded-r-lg">
+                                    <p><strong class="text-zinc-900">3. The Bad Decision:</strong> The new model shows influencer spend is now highly significant (p < 0.001) with a massive ROI. Leadership decides to launch another influencer campaign in November to boost Q4 sales.</p>
+                                </div>
+                                <div class="w-full bg-red-50 border-2 border-red-500 p-4 rounded-lg shadow-lg mt-4">
+                                    <p><strong class="text-red-700">4. The Consequence:</strong> The November campaign fails and the budget is wasted. The model attributed the sales lift from seasonality to the influencer campaign because the real driver was wrongly excluded based on its p-value.</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-orange-800">2. The P-Value Selected Model</h4>
-                                <p class="text-zinc-700 mt-1">An analyst builds a regression model to explain sales, including spend from all channels. Using p-value selection, they find that "influencer spend" is highly significant (p < 0.001), while TV and email are not. The final model, containing only the "significant" variables, suggests every dollar spent on influencers generates $50 in sales.</p>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-orange-800">3. The Causal Fallacy</h4>
-                                <p class="text-zinc-700 mt-1">The CMO, seeing the impressive p-value and ROI, declares, "Influencers are our statistically proven silver bullet! For next year's campaign, let's cut the TV and email budget and put 90% of our money into influencers."</p>
-                            </div>
-                            <div class="bg-orange-100 p-4 rounded-md">
-                                <h4 class="text-lg font-bold text-red-700">4. The Flaw</h4>
-                                <p class="text-zinc-700 font-semibold mt-1">The p-value selection process couldn't disentangle the effects. The TV ads and email blasts created brand awareness that drove people to search for the product, where they then saw the influencer's content and clicked. The influencer campaign got the final "click" and thus looked like the sole <b>significant</b> driver in the model, but it was only the last step in a chain. The model didn't find the true cause; it just latched onto the most statistically convenient correlation.</p>
+                        </div>
+                        <!-- Example 2: Residual Chasing -->
+                        <div class="flex flex-col mt-12 md:mt-0">
+                            <h4 class="text-xl font-bold text-center mb-4 text-zinc-800">Example 2: Chasing the Residuals</h4>
+                            <div class="flex-grow flex flex-col items-center space-y-4">
+                                <div class="w-full bg-stone-50 border-l-4 border-stone-300 p-4 rounded-r-lg">
+                                    <p><strong class="text-zinc-900">1. The Scenario:</strong> An analyst builds a simple model with just marketing channels. When they plot the model's errors (residuals), they notice the model consistently under-predicts sales in the summer.</p>
+                                </div>
+                                <div class="w-full bg-stone-50 border-l-4 border-stone-300 p-4 rounded-r-lg">
+                                    <p><strong class="text-zinc-900">2. The Flawed Analysis:</strong> To "fix" this pattern, the analyst adds a "summer" variable to the model. The new variable is now highly significant, the residuals look random, and the R-squared improves.</p>
+                                </div>
+                                 <div class="w-full bg-stone-50 border-l-4 border-stone-300 p-4 rounded-r-lg">
+                                    <p><strong class="text-zinc-900">3. The Bad Decision:</strong> The model now seems more robust and trustworthy. It understates the effect of a marketing channel that runs in the summer, because the new "summer" variable is soaking up credit. The team reduces spend on that channel.</p>
+                                </div>
+                                 <div class="w-full bg-red-50 border-2 border-red-500 p-4 rounded-lg shadow-lg mt-4">
+                                    <p><strong class="text-red-700">4. The Consequence:</strong> The company cuts budget from a profitable channel because its effect was masked by a variable added only after looking at the data's errors. This is data snooping, and it leads to cutting what works.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
